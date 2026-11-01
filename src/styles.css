@@ -1,0 +1,273 @@
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+@import "leaflet/dist/leaflet.css" layer(base);
+
+/* Keep browser defaults while preserving the existing design and Leaflet geometry. */
+@theme {
+  --animate-fade-in: fade-in 0.15s;
+  --animate-slide-in: slide-in 0.2s;
+  --animate-toast-in: toast-in 0.2s;
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes slide-in {
+    from {
+      transform: translateX(-20px);
+      opacity: 0.5;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  @keyframes toast-in {
+    from {
+      opacity: 0;
+      translate: 0 10px;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+}
+
+@layer base {
+  :root {
+    @apply [font-family:Inter,_ui-sans-serif,_-apple-system,_BlinkMacSystemFont,_"Segoe_UI",_sans-serif] [color:#191919] bg-white [font-synthesis:none] font-normal text-[15px] [--header-h:66px] [--line:#e8e8e8] [--muted:#747474] [--black:#171717] [--red:#ed2939];
+  }
+  * {
+    @apply box-border;
+  }
+  body {
+    @apply m-0;
+  }
+  button {
+    @apply [font:inherit];
+  }
+  input {
+    @apply [font:inherit];
+  }
+  textarea {
+    @apply [font:inherit];
+  }
+  select {
+    @apply [font:inherit];
+  }
+  button {
+    @apply [-webkit-tap-highlight-color:transparent];
+  }
+  a {
+    @apply [-webkit-tap-highlight-color:transparent];
+  }
+  input {
+    @apply [-webkit-tap-highlight-color:transparent];
+  }
+  select {
+    @apply [-webkit-tap-highlight-color:transparent];
+  }
+  textarea {
+    @apply [-webkit-tap-highlight-color:transparent];
+  }
+  button {
+    @apply touch-manipulation;
+  }
+  a {
+    @apply touch-manipulation;
+  }
+  button {
+    @apply cursor-pointer;
+  }
+  a {
+    @apply [color:inherit] no-underline;
+  }
+  button:disabled {
+    @apply cursor-not-allowed opacity-[0.42];
+  }
+  button {
+    @apply [color:inherit];
+  }
+  h1 {
+    @apply mt-[0];
+  }
+  h2 {
+    @apply mt-[0];
+  }
+  h3 {
+    @apply mt-[0];
+  }
+  p {
+    @apply mt-[0];
+  }
+  h1 {
+    @apply text-[32px] font-bold tracking-[-1.2px] leading-[1.25] mb-[12px];
+  }
+  h2 {
+    @apply text-[21px] font-semibold tracking-[-0.45px] leading-[1.4] mb-[15px];
+  }
+  h3 {
+    @apply text-[16px] font-semibold leading-[1.4] mb-[8px];
+  }
+  p {
+    @apply leading-[1.6];
+  }
+  svg {
+    @apply shrink-0;
+  }
+  button:focus-visible {
+    @apply [outline:3px_solid_#78b5ea] [outline-offset:4px];
+  }
+  a:focus-visible {
+    @apply [outline:3px_solid_#78b5ea] [outline-offset:4px];
+  }
+  input:focus-visible {
+    @apply [outline:3px_solid_#c2daf0] [outline-offset:1px] [border-color:#7a9cba];
+  }
+  textarea:focus-visible {
+    @apply [outline:3px_solid_#c2daf0] [outline-offset:1px] [border-color:#7a9cba];
+  }
+  select:focus-visible {
+    @apply [outline:3px_solid_#c2daf0] [outline-offset:1px] [border-color:#7a9cba];
+  }
+  input {
+    @apply w-full min-w-0 [border:1px_solid_#dedede] rounded-[8px] bg-white [padding:11px_13px] [color:#222] [transition:border_0.15s];
+  }
+  textarea {
+    @apply w-full min-w-0 [border:1px_solid_#dedede] rounded-[8px] bg-white [padding:11px_13px] [color:#222] [transition:border_0.15s];
+  }
+  select {
+    @apply w-full min-w-0 [border:1px_solid_#dedede] rounded-[8px] bg-white [padding:11px_13px] [color:#222] [transition:border_0.15s];
+  }
+  input::placeholder {
+    @apply [color:#999];
+  }
+  textarea::placeholder {
+    @apply [color:#999];
+  }
+  textarea {
+    @apply block min-h-[105px] resize-y leading-[1.5];
+  }
+  select {
+    @apply min-h-[43px];
+  }
+  label {
+    @apply block font-medium text-[14px] [margin:18px_0_7px];
+  }
+  input[type="checkbox"] {
+    @apply w-[16px] h-[16px] p-0 [accent-color:#171717] shrink-0;
+  }
+  input[aria-invalid="true"] {
+    @apply [border-color:#f05260];
+  }
+  textarea[aria-invalid="true"] {
+    @apply [border-color:#f05260];
+  }
+  select[aria-invalid="true"] {
+    @apply [border-color:#f05260];
+  }
+  fieldset {
+    @apply p-0 [margin:24px_0] border-0 min-w-0;
+  }
+  legend {
+    @apply p-0 font-medium text-[14px] mb-[10px];
+  }
+  table {
+    @apply w-full border-collapse text-[13px] text-left;
+  }
+  th {
+    @apply font-medium [color:#888] text-[11px] [background:#fafafa] [padding:15px_18px] [border-bottom:1px_solid_#e7e7e7] whitespace-nowrap;
+  }
+  td {
+    @apply [padding:18px] [border-bottom:1px_solid_#eee] leading-[1.5] align-middle;
+  }
+  tbody tr:last-child td {
+    @apply [border-bottom:0];
+  }
+  tbody tr:hover {
+    @apply [background:#fdfdfd];
+  }
+  td:has(> input[type="checkbox"]) {
+    @apply w-[30px] pr-[0];
+  }
+  @media (max-width: 700px) {
+    :root {
+      @apply [--header-h:57px] text-[14px];
+    }
+  }
+  @media (max-width: 700px) {
+    table {
+      @apply block w-full;
+    }
+  }
+  @media (max-width: 700px) {
+    tbody {
+      @apply block w-full;
+    }
+  }
+  @media (max-width: 700px) {
+    thead {
+      @apply hidden;
+    }
+  }
+  @media (max-width: 700px) {
+    tbody {
+      @apply grid gap-[12px];
+    }
+  }
+  @media (max-width: 700px) {
+    tr {
+      @apply flex items-center flex-wrap gap-[10px] [border:1px_solid_#e5e5e5] rounded-[9px] [padding:17px] bg-white;
+    }
+  }
+  @media (max-width: 700px) {
+    td {
+      @apply block p-0! border-0! text-[12px];
+    }
+  }
+  @media (max-width: 700px) {
+    td:first-child {
+      @apply basis-[100%] w-full;
+    }
+  }
+  @media (max-width: 700px) {
+    td:last-child {
+      @apply ml-auto;
+    }
+  }
+  @media (max-width: 700px) {
+    td:has(> input[type="checkbox"]) {
+      @apply basis-[20px] w-[20px];
+    }
+  }
+  @media (max-width: 700px) {
+    td:has(> input[type="checkbox"]) + td {
+      @apply flex-1 min-w-[calc(100%_-_31px)];
+    }
+  }
+  @media (max-width: 700px) {
+    td:has(> input[type="checkbox"]) ~ td:nth-child(3) {
+      @apply text-[11px] [color:#888];
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      @apply [animation:none]! [transition:none]! scroll-auto!;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *::before {
+      @apply [animation:none]! [transition:none]! scroll-auto!;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *::after {
+      @apply [animation:none]! [transition:none]! scroll-auto!;
+    }
+  }
+}
