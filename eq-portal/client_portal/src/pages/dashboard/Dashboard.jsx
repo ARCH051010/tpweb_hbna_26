@@ -38,7 +38,7 @@ export default function Dashboard() {
     cargarDatos();
   }, [vistaActual]);
 
-  const handleGuardar = async (formData) => {
+    const handleGuardar = async (formData) => {
     setErrorMsg("");
     try {
       if (vistaActual === 'editores') {
@@ -47,8 +47,19 @@ export default function Dashboard() {
         await crearAdministrador(formData);
       }
       cargarDatos(); 
+      return true; // <-- Importante: Retornamos true si todo salió bien
     } catch (error) {
-      setErrorMsg(error.response?.data?.username?.[0] || "Error al crear el usuario. Revisa los datos.");
+      // Atrapamos el error del backend y lo mostramos
+      const backendErrors = error.response?.data;
+      let mensaje = "Error al crear el usuario. Revisa los datos.";
+      
+      if (backendErrors) {
+        const primerCampo = Object.keys(backendErrors)[0];
+        mensaje = `Error en ${primerCampo}: ${backendErrors[primerCampo][0]}`;
+      }
+      
+      setErrorMsg(mensaje);
+      return false; // <-- Retornamos false para que el formulario no se limpie
     }
   };
 

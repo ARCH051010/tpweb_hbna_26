@@ -283,3 +283,36 @@ tr:hover td {
   border-color: #0b6b4b;
   color: white;
 }
+
+/* Estilo para errores del formulario*/
+.error-text {
+  color: #dc2626;
+  font-size: 0.75rem;
+  margin-top: 0.3rem;
+  display: block;
+  font-weight: 500;
+}
+
+/* I need your help to make this work on responsive mobile */
+@media (max-width: 768px) { 
+  .dashboard-grid {
+    grid-template-columns: 1fr; /* Una sola columna en pantallas pequeñas */
+  }
+
+  .dashboard-card {
+    padding: 1rem; /* Reducir el padding en tarjetas para móviles */
+  }
+
+  .table-header {
+    flex-direction: column; /* Apilar elementos en lugar de alinearlos horizontalmente */
+    align-items: flex-start; /* Alinear al inicio */
+  }
+
+  .search-input {
+    max-width: 100%; /* Permitir que el input ocupe todo el ancho disponible */
+  }
+
+  .table-responsive {
+    overflow-x: auto; /* Permitir scroll horizontal si la tabla es demasiado ancha */
+  }
+}

@@ -88,3 +88,11 @@
 .btn-toggle:hover {
   text-decoration: underline;
 }
+
+.error-text {
+  color: #dc2626;
+  font-size: 0.75rem;
+  margin-top: 0.3rem;
+  display: block;
+  font-weight: 500;
+}
