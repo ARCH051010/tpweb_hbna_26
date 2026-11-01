@@ -61,3 +61,34 @@ export const obtenerNoticiaPorId = async (id) => {
     throw error;
   }
 };
+
+export const crearNoticiaAdmin = async (datos, archivoImagen) => {
+  const formData = new FormData();
+  formData.append('titulo', datos.titulo);
+  formData.append('contenido', datos.contenido);
+  formData.append('fecha', datos.fecha);
+  if (archivoImagen) formData.append('imagen', archivoImagen);
+
+  const respuesta = await apiClient.post('/noticias/noticias/', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+  return respuesta.data;
+};
+
+export const eliminarNoticiaAdmin = async (id) => {
+  await apiClient.delete(`/noticias/noticias/${id}/`);
+};
+
+export const actualizarNoticiaAdmin = async (id, datos, archivoImagen) => {
+  const formData = new FormData();
+  formData.append('titulo', datos.titulo);
+  formData.append('contenido', datos.contenido);
+  formData.append('fecha', datos.fecha);
+  // Solo enviamos la imagen si el usuario seleccionó una nueva
+  if (archivoImagen) formData.append('imagen', archivoImagen);
+
+  const respuesta = await apiClient.put(`/noticias/noticias/${id}/`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+  return respuesta.data;
+};

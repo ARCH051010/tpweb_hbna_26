@@ -15,8 +15,8 @@ class NoticiaViewSet(viewsets.ModelViewSet):
         return [IsAdminOEditor()]
 
     def perform_create(self, serializer):
-        # Asignamos automáticamente al usuario logueado como autor
-        serializer.save(autor=self.request.user.editor)
+        # Asignamos automáticamente al usuario que está haciendo la petición como autor de la noticia
+        serializer.save(autor=self.request.user)
 
 class EventoViewSet(viewsets.ModelViewSet):
     queryset = Evento.objects.all()
@@ -25,7 +25,9 @@ class EventoViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:
             return [permissions.AllowAny()]
-        return [EsAdminOEditor()]
+        return [IsAdminOEditor()]
 
     def perform_create(self, serializer):
-        serializer.save(encargado=self.request.user.editor)
+
+        # Asignamos automáticamente al usuario que está haciendo la petición como encargado del evento
+        serializer.save(encargado=self.request.user)

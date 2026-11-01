@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function UsuariosTable({ usuarios, vistaActual, onEliminar, currentUsername, cargando }) {
+export default function UsuariosTable({ usuarios, vistaActual, onEliminar, currentUsername, cargando, onEditar }) {
   const [search, setSearch] = useState("");
 
   // Filtrado interno
@@ -47,19 +47,22 @@ export default function UsuariosTable({ usuarios, vistaActual, onEliminar, curre
               filteredUsers.map((u) => (
                 <tr key={u.ci}>
                   <td className="fw-semibold">{u.username}</td>
+
                   <td>{u.email}</td>
+
                   <td><span className="badge badge-success">{u.ci}</span></td>
+
                   <td>
                     <div className="table-actions">
-                      {u.username !== currentUsername ? (
-                        <button onClick={() => onEliminar(u.ci)} className="btn-sm btn-outline-danger">
-                          Eliminar
-                        </button>
-                      ) : (
-                        <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Tú</span>
-                      )}
+                      <button onClick={() => onEditar(u)} className="btn-sm btn-outline-success">
+                        Editar
+                      </button>
+                      <button onClick={() => onEliminar(u.id)} className="btn-sm btn-outline-danger">
+                        Eliminar
+                      </button>
                     </div>
                   </td>
+                  
                 </tr>
               ))
             )}

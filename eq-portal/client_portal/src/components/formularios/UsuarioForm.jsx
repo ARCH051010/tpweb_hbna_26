@@ -1,9 +1,12 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { schemaRegistro } from "../../schemas/authSchemas"; 
+import { useState, useEffect } from "react";
 
 export default function UsuarioForm({ vistaActual, onGuardar }) {
   const esEditor = vistaActual === 'editores';
+
+  const [itemEditando, setItemEditando] = useState(null);
 
   // Configuramos React Hook Form
   const {
@@ -14,6 +17,22 @@ export default function UsuarioForm({ vistaActual, onGuardar }) {
   } = useForm({
     resolver: zodResolver(schemaRegistro),
   });
+
+  useEffect(() => {
+    if (itemEditando) {
+      // MODO EDICIÓN: Cargamos los datos del usuario, pero dejamos las contraseñas en blanco
+      reset({
+        username: itemEditando.username,
+        email: itemEditando.email,
+        ci: itemEditando.ci,
+        password: "",
+        confirmPassword: ""
+      });
+    } else {
+      // MODO CREACIÓN: Limpiamos el formulario
+      reset({ username: "", email: "", ci: "", password: "", confirmPassword: "" });
+    }
+  }, [itemEditando, reset]);
 
   // Esta función solo se ejecuta si Zod valida que todo está correcto
   const onSubmit = async (data) => {

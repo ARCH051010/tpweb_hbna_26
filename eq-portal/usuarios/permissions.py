@@ -7,7 +7,7 @@ class IsAdministrador(permissions.BasePermission):
     """
     def has_permission(self, request, view):
         # Verifica si el usuario está logueado y si tiene la propiedad administrador, si es correcto da True
-        return request.user.is_authenticated and hasattr(request.user, 'administrador')
+        return request.user.is_superuser or hasattr(request.user, 'administrador')
 
 class IsEditor(permissions.BasePermission):
     """
