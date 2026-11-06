@@ -12,6 +12,8 @@ import { useAuth } from "../../context/AuthContext";
 import apiClient from "../../services/apiClient";
 import "./login.css";
 
+import PasswordInput from "../../pages/auth/PasswordInput";
+
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
 
@@ -130,17 +132,25 @@ export default function Login() {
             </>
           )}
 
+          {/* Para la input del password */}
           <div className="form-grupo">
             <label>Contraseña</label>
-            <input type="password" {...register("password")} />
-            {errors.password && <span className="error-text">{errors.password.message}</span>}
+            <PasswordInput 
+              register={register} 
+              name="password" 
+              error={errors.password} 
+            />
           </div>
-
+          
+          {/* Si está registrando un usuario */}
           {!isLogin && (
             <div className="form-grupo">
               <label>Confirmar Contraseña</label>
-              <input type="password" {...register("confirmPassword")} />
-              {errors.confirmPassword && <span className="error-text">{errors.confirmPassword.message}</span>}
+              <PasswordInput 
+                register={register} 
+                name="confirmPassword" 
+                error={errors.confirmPassword} 
+              />
             </div>
           )}
 

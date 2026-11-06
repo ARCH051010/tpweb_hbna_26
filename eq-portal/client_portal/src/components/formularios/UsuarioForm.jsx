@@ -3,6 +3,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { schemaRegistro } from "../../schemas/authSchemas"; 
 import { useState, useEffect } from "react";
 
+import PasswordInput from "../../pages/auth/PasswordInput"; 
+
 export default function UsuarioForm({ vistaActual, onGuardar }) {
   const esEditor = vistaActual === 'editores';
 
@@ -74,14 +76,20 @@ export default function UsuarioForm({ vistaActual, onGuardar }) {
 
         <div className="form-group">
           <label>Contraseña</label>
-          <input type="password" {...register("password")} className="form-control" />
-          {errors.password && <span className="error-text">{errors.password.message}</span>}
+          <PasswordInput 
+            register={register} 
+            name="password" 
+            error={errors.password} 
+          />
         </div>
 
         <div className="form-group">
           <label>Confirmar Contraseña</label>
-          <input type="password" {...register("confirmPassword")} className="form-control" />
-          {errors.confirmPassword && <span className="error-text">{errors.confirmPassword.message}</span>}
+          <PasswordInput 
+            register={register} 
+            name="confirmPassword" 
+            error={errors.confirmPassword} 
+          />
         </div>
 
         <div className="form-buttons">
@@ -89,6 +97,7 @@ export default function UsuarioForm({ vistaActual, onGuardar }) {
             Registrar {esEditor ? 'Editor' : 'Admin'}
           </button>
         </div>
+        
       </form>
     </section>
   );
