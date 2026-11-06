@@ -52,14 +52,15 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def get_token(cls, user):
         token = super().get_token(user)
         
-        # Agregamos datos personalizados al token
+        # Agregamos el username al token
         token['username'] = user.username
+        
         # Verificamos si es administrador o editor
         if hasattr(user, 'administrador'):
             token['rol'] = 'admin'
         elif hasattr(user, 'editor'):
             token['rol'] = 'editor'
         else:
-            token['rol'] = 'desconocido' # Por si es un superusuario base
+            token['rol'] = 'desconocido'
 
         return token

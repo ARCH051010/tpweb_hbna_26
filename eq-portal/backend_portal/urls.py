@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+
+# Para poder usar el Token de Simple JWT y la clase que creamos para personalizarlo, importamos la vista de Simple JWT y la clase que creamos para personalizar el Token
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from usuarios.serializers import CustomTokenObtainPairSerializer
 
@@ -14,9 +16,13 @@ urlpatterns = [
     path('api/usuarios/', include('usuarios.urls')),
     path('api/noticias/', include('noticias.urls')),
 
-    # Rutas de Autenticación JWT
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # Rutas de Autenticación SIMPLE JWT pero con la ruta personalizada para que use nuestro serializer y así poder enviar el rol del usuario en el token y el nombre de usuario
+    # Ruta de acceso y de refresco del Token del usuario y contraseña que se envía
+    path('api/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
+
+    #Refrescar el token que se está enviando para acceder.
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
 ]
 
 # Esto es para que Django deje acceder a los archivos multimedia (imágenes) cuando estamos en modo DEBUG es decir en modo desarrollo, ya que en producción se hace de otra manera

@@ -35,6 +35,12 @@ export const eliminarEditor = async (ci) => {
   }
 };
 
+export const actualizarEditor = async (ci, datos) => {
+  // Usamos PUT para actualizar (o PATCH si solo envías algunos campos)
+  const respuesta = await apiClient.put(`/usuarios/editores/${ci}/`, datos);
+  return respuesta.data;
+};
+
 // Funciones para manejar las resquest de los usuarios administradores
 export const obtenerAdministradores = async () => {
   const respuesta = await apiClient.get('/usuarios/administradores/');
@@ -48,4 +54,9 @@ export const crearAdministrador = async (datos) => {
 
 export const eliminarAdministrador = async (ci) => {
   await apiClient.delete(`/usuarios/administradores/${ci}/`);
+};
+
+export const actualizarAdministrador = async (ci, datos) => {
+  const respuesta = await apiClient.put(`/usuarios/administradores/${ci}/`, datos);
+  return respuesta.data;
 };

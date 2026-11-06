@@ -9,6 +9,7 @@ from django.contrib.auth.models import AbstractUser
 class Usuario(AbstractUser):
     # Hay que decirle a Django que no use la llave primaria por defecto
     id = None 
+    
     ci = models.CharField(max_length=11, primary_key=True, unique=True, verbose_name="Carnet de Identidad")
 
     def __str__(self):
