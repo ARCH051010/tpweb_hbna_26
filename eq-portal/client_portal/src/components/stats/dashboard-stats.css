@@ -1,0 +1,81 @@
+/* StatsDashboard.css */
+.stats-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Tarjetas KPI */
+.stats-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.kpi-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border-left: 5px solid var(--color-primary);
+}
+
+.kpi-card h3 {
+  font-size: 0.9rem;
+  color: #64748b;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.kpi-number {
+  font-family: var(--font-headings);
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--color-dark);
+  line-height: 1;
+}
+
+/* Gráficos */
+.stats-charts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.dashboard-eyebrow {
+  color: #47996a;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  color: var(--db-text-muted);
+}
+
+.dashboard-title {
+  color: var(--db-text);
+  font-family: var(--font-headings);
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.03em;
+}
+
+@media (min-width: 992px) {
+  .stats-charts {
+    grid-template-columns: 1fr 1fr; /* Dos columnas en PC */
+  }
+}
+
+.chart-container {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.chart-container h3 {
+  font-family: var(--font-headings);
+  color: var(--color-dark);
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+}
