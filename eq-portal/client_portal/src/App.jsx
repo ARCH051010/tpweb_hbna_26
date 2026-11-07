@@ -13,6 +13,9 @@ import NoticiaDetalle from "./pages/noticias/NoticiaDetalle";
 import Dashboard from "./pages/dashboard/Dashboard";
 import NoticiaForm from "./components/formularios/NoticiForm"
 import Login from "./pages/auth/Login"; 
+import ConsejoPage from "./pages/institucional/ConsejoPage";
+import FEUPage from "./pages/institucional/FEUPage";
+import DeptAdminPage from "./pages/institucional/DeptAdminPage"
 
 // Importaciones del Dashboard
 import StatsPage from "./components/stats/DashoardStats";
@@ -63,7 +66,21 @@ function AppContent() {
           <Route path="eventos" element={<EventosPage />} />
           <Route path="usuarios/editores" element={<UsuariosPage tipo="editores" />} />
           <Route path="usuarios/admins" element={<UsuariosPage tipo="admins" />} />
+
+          {/* Para el PA */}
+            <Route path="institucional/departamentos" element={<DeptAdminPage />} />
+
+            {/* Decomentar aquí para poder mostrar la page según corresponde NAO y ANDRIA */}
+            {/* <Route path="institucional/feu" element={<ComponenteAdminPage />} /> 
+            <Route path="institucional/consejo-direccion" element={<ComponenteAdminPage />} /> 
+            <Route path="institucional/centro-desarrollo" element={<ComponenteAdminPage />} />  */}
         </Route>
+        
+        {/* Decomentar aquí para poder mostrar la page según corresponde NAO y ANDRIA */}
+        <Route path="/consejo-direccion" element={<ConsejoPage />} />
+        <Route path="/estudiantes-feu" element={<FEUPage />} />
+        {/* <Route path="/centro-desarrollo" element={<FEUPage />} />
+        <Route path="/departamentos" element={<FEUPage />} /> */}
 
         {/* Pagina de error 404 cuando se ingresa una ruta que no ha sido registrada */}
         <Route path="*" element={<NotFound />} />
