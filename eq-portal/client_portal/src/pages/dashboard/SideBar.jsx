@@ -1,5 +1,6 @@
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { faUniversity } from '@fortawesome/free-solid-svg-icons';
 
 // Contextos
 import { useAuth } from "../../context/AuthContext";
@@ -7,6 +8,7 @@ import { useAuth } from "../../context/AuthContext";
 // Estilos
 import "./side-bar.css";
 
+// Componentes
 import Logo from "../../components/logo/Logo";
 
 // Servicios
@@ -15,12 +17,12 @@ import {
   faChartPie, faUsers, faNewspaper, faCalendarAlt, 
   faGlobe, faSignOutAlt, faChevronDown, faChevronUp 
 } from '@fortawesome/free-solid-svg-icons';
-import "./side-bar.css";
 
 export default function Sidebar({vistaActual, setVistaActual}) {
   const { user, logout } = useAuth();
   const [openUsers, setOpenUsers] = useState(false);
   const navigate = useNavigate();
+  const [openInstitucional, setOpenInstitucional] = useState(false);
 
   return (
     <aside className="sidebar">
@@ -71,7 +73,28 @@ export default function Sidebar({vistaActual, setVistaActual}) {
         <NavLink to="/dashboard/eventos" className={({ isActive }) => `sidebar-link ${isActive ? 'activo' : ''}`}>
           <FontAwesomeIcon icon={faCalendarAlt} className="sidebar-icon" />
           Eventos
-        </NavLink>  
+        </NavLink> 
+
+        <div className="sidebar-dropdown-container">
+        <button className="sidebar-link" onClick={() => setOpenInstitucional(!openInstitucional)}>
+          <FontAwesomeIcon icon={faUniversity} className="sidebar-icon" />
+          Institucional
+          <FontAwesomeIcon icon={openInstitucional ? faChevronUp : faChevronDown} className="sidebar-chevron" />
+        </button>
+
+        {openInstitucional && (
+          <div className="sidebar-dropdown-menu">
+            <NavLink to="/dashboard/institucional/departamentos" className={({ isActive }) => `sidebar-sublink ${isActive ? 'activo-sub' : ''}`}>
+              Departamentos
+            </NavLink>
+            <NavLink to="/dashboard/institucional/consejo" className={({ isActive }) => `sidebar-sublink ${isActive ? 'activo-sub' : ''}`}>
+              Consejo de Dirección
+            </NavLink>
+            {/* Aquí agregarás Centros y FEU cuando las crees */}
+          </div>
+        )}
+      </div>
+
       </nav>
 
       {/* Perfil del Usuario y Logout */}

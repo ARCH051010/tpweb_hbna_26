@@ -16,6 +16,7 @@ urlpatterns = [
     path('api/usuarios/', include('usuarios.urls')),
     path('api/noticias/', include('noticias.urls')),
     path('api/estadisticas/', include('stats.urls')),
+    path('api/institucional/', include('institucional.urls')),
 
     # Rutas de Autenticación SIMPLE JWT pero con la ruta personalizada para que use nuestro serializer y así poder enviar el rol del usuario en el token y el nombre de usuario
     # Ruta de acceso y de refresco del Token del usuario y contraseña que se envía

@@ -1,0 +1,42 @@
+/* CONTENEDOR PRINCIPAL (Grid de 2 columnas) */
+.inst-intro {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr; /* Móvil: 1 columna */
+  gap: 2rem;
+}
+
+/* Escritorio: 2 columnas */
+@media (min-width: 768px) {
+  .inst-intro {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start; /* Alinea los textos arriba */
+  }
+}
+
+/* ETIQUETA PEQUEÑA (Ej: LIDERAZGO Y COORDINACIÓN) */
+.inst-eyebrow {
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* TÍTULO GRANDE (Fuente serif elegante) */
+.inst-title {
+  font-family: var(--font-headings);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--color-dark);
+  line-height: 1.1;
+}
+
+/* TEXTO DE LA DERECHA */
+.inst-intro-text p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #475569;
+}

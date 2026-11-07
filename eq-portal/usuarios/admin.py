@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import Usuario, Administrador, Editor
 
-# 1. Registramos el Usuario base usando UserAdmin
+# Registramos el Usuario base usando UserAdmin
 @admin.register(Usuario)
 
 # Hereda de UserAdmin para personalizar la vista de administración del modelo Usuario 
