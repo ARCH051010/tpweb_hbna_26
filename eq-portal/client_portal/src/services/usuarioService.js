@@ -60,3 +60,4 @@ export const actualizarAdministrador = async (ci, datos) => {
   const respuesta = await apiClient.put(`/usuarios/administradores/${ci}/`, datos);
   return respuesta.data;
 };
+

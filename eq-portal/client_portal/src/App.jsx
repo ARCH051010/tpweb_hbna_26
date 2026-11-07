@@ -1,14 +1,24 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+
+// Contextos
 import { AuthProvider } from './context/AuthContext';
+import { useAuth } from "./context/AuthContext";
+
+// Componentes
 import Navbar from "./components/navbar/NavBar";
 import Footer from "./components/Footer/Footer"; 
 import Home from "./pages/home/Home";
 import NotFound from "./pages/error404/NotFound";
 import NoticiaDetalle from "./pages/noticias/NoticiaDetalle";
 import Dashboard from "./pages/dashboard/Dashboard";
-import NoticiaForm from "./components/formularios/UsuarioForm"
+import NoticiaForm from "./components/formularios/NoticiForm"
 import Login from "./pages/auth/Login"; 
-import { useAuth } from "./context/AuthContext";
+
+// Importaciones del Dashboard
+import StatsPage from "./components/stats/DashoardStats";
+import NoticiasPage from "./pages/noticias/NoticiaPage";
+import EventosPage from "./pages/eventos/EventoPage";
+import UsuariosPage from "./pages/usuarios/UsuarioPage";
 
 // Componente para proteger rutas
 const RutaProtegida = ({ children }) => {
@@ -43,6 +53,18 @@ function AppContent() {
         {/* Ruta para cuando den click en leer más sobre una noticia, tomamos el id de la url */}
         <Route path="/noticias/:id" element={<NoticiaDetalle />} />
 
+        {/* RUTAS ANIDADAS DEL DASHBOARD */}
+        <Route path="/dashboard" element={<RutaProtegida><Dashboard /></RutaProtegida>}>
+          {/* Cuando entran a /dashboard, los mandamos a /dashboard/estadisticas */}
+          <Route index element={<Navigate to="estadisticas" replace />} />
+          
+          <Route path="estadisticas" element={<StatsPage />} />
+          <Route path="noticias" element={<NoticiasPage />} />
+          <Route path="eventos" element={<EventosPage />} />
+          <Route path="usuarios/editores" element={<UsuariosPage tipo="editores" />} />
+          <Route path="usuarios/admins" element={<UsuariosPage tipo="admins" />} />
+        </Route>
+
         {/* Pagina de error 404 cuando se ingresa una ruta que no ha sido registrada */}
         <Route path="*" element={<NotFound />} />
       </Routes>
@@ -57,7 +79,7 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <AppContent />
+          <AppContent />
       </AuthProvider>
     </BrowserRouter>
   );

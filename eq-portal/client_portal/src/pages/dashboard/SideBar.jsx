@@ -1,29 +1,77 @@
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+
+// Contextos
 import { useAuth } from "../../context/AuthContext";
+
+// Estilos
 import "./side-bar.css";
 
-export default function Sidebar() {
+import Logo from "../../components/logo/Logo";
+
+// Servicios
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faChartPie, faUsers, faNewspaper, faCalendarAlt, 
+  faGlobe, faSignOutAlt, faChevronDown, faChevronUp 
+} from '@fortawesome/free-solid-svg-icons';
+import "./side-bar.css";
+
+export default function Sidebar({vistaActual, setVistaActual}) {
   const { user, logout } = useAuth();
+  const [openUsers, setOpenUsers] = useState(false);
   const navigate = useNavigate();
 
   return (
     <aside className="sidebar">
+
       {/* Logo */}
-      <div className="sidebar-logo">
-        <span className="sidebar-logo-icono">🐊</span>
-        <span className="sidebar-logo-texto">FTI Admin</span>
-      </div>
+      <Link to={"/"} className="sidebar-brand">
+        <Logo size={85} />
+        {/* <span>Panel de Administración</span> */}
+      </Link>
 
       {/* Enlaces de Navegación */}
       <nav className="sidebar-nav">
-        <Link to="/dashboard" className="sidebar-link activo">
-          Panel Administrativo
-        </Link>
+         {/* Escritorio */}
+        <NavLink to="/dashboard/estadisticas" className={({ isActive }) => `sidebar-link ${isActive ? 'activo' : ''}`}>
+          <FontAwesomeIcon icon={faChartPie} className="sidebar-icon" />
+          Escritorio
+        </NavLink>
 
-        <Link to="/" className="sidebar-link">
-          Ir a la página principal
-        </Link>
-        
+        {/* Usuarios (Solo Admin) */}
+        {user?.rol === 'admin' && (
+          <div className="sidebar-dropdown-container">
+            <button className="sidebar-link" onClick={() => setOpenUsers(!openUsers)}>
+              <FontAwesomeIcon icon={faUsers} className="sidebar-icon" />
+              Usuarios
+              <FontAwesomeIcon icon={openUsers ? faChevronUp : faChevronDown} className="sidebar-chevron" />
+            </button>
+            
+            {openUsers && (
+              <div className="sidebar-dropdown-menu">
+                <NavLink to="/dashboard/usuarios/editores" className={({ isActive }) => `sidebar-sublink ${isActive ? 'activo-sub' : ''}`}>
+                  Editores
+                </NavLink>
+                <NavLink to="/dashboard/usuarios/admins" className={({ isActive }) => `sidebar-sublink ${isActive ? 'activo-sub' : ''}`}>
+                  Administradores
+                </NavLink>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Noticias */}
+        <NavLink to="/dashboard/noticias" className={({ isActive }) => `sidebar-link ${isActive ? 'activo' : ''}`}>
+          <FontAwesomeIcon icon={faNewspaper} className="sidebar-icon" />
+          Noticias
+        </NavLink>
+
+        {/* Eventos */}
+        <NavLink to="/dashboard/eventos" className={({ isActive }) => `sidebar-link ${isActive ? 'activo' : ''}`}>
+          <FontAwesomeIcon icon={faCalendarAlt} className="sidebar-icon" />
+          Eventos
+        </NavLink>  
       </nav>
 
       {/* Perfil del Usuario y Logout */}

@@ -1,4 +1,3 @@
-/* INDEX.CSS */
 html {
   /* PARA EL NAVEGAR SUAVE A LAS SECCIONES */
   scroll-behavior: smooth;
@@ -8,10 +7,10 @@ html {
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* ESTO ES VITAL: EL PADDING NO AUMENTA EL TAMAÑO DE LAS CAJAS */
+  box-sizing: border-box; /* EL PADDING NO AUMENTA EL TAMAÑO DE LAS CAJAS */
 }
 
-/* VARIABLES GLOBALES (COLORES INSTITUCIONALES) */
+/* VARIABLES GLOBALES */
 :root {
   --color-primary: #0b6b4b;
   --color-dark: #073b2b;
@@ -32,6 +31,13 @@ body {
 
   /* PARA QUE NO HAYA SCROLL HORIZONTAL */
   overflow-x: hidden;
+}
+
+/* ESTILO BASE PARA EL LOGO */
+.logo-img {
+  border-radius: 50%; /* Lo hace circular */
+  padding: 2px; /* Un pequeño margen interno */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra sutil */
 }
 
 /* ESTILOS PARA ENLACES Y BOTONES */

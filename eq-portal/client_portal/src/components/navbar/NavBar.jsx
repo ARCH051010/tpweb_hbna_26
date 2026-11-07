@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {  Link } from "react-router-dom";
 import "./navbar.css";
+import Logo from "../logo/Logo";
 
 {/* Enlaces de navegación, array con los datos de cada enlace */}
 const navLinks = [
@@ -24,10 +25,8 @@ export default function Navbar() {
       <div className="navbar-contenedor">
         
         {/* Logo */}
-        {/* Cuando presionas el logo te lleva a la página principal y cierra el menú si está abierto */}
-        <Link to="/" className="logo" onClick={closeMenu}>
-          <span className="logo-icono">C</span>
-          <span>Caimanes</span>
+        <Link to="/" className="navbar-brand">
+          <Logo size={65} />
         </Link>
 
         {/* Botón de Hamburguesa (Móvil) */}
