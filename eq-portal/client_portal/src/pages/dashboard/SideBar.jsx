@@ -36,7 +36,7 @@ export default function Sidebar({vistaActual, setVistaActual}) {
          {/* Escritorio */}
         <NavLink to="/dashboard/estadisticas" className={({ isActive }) => `sidebar-link ${isActive ? 'activo' : ''}`}>
           <FontAwesomeIcon icon={faChartPie} className="sidebar-icon" />
-          Escritorio
+          Estadísitcas
         </NavLink>
 
         {/* Usuarios (Solo Admin) */}

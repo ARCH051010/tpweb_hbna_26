@@ -23,6 +23,7 @@
 }
 
 .dashboard-main {
+  background-color: #dfdfdf;
   flex-grow: 1;
   padding: 2rem;
   overflow-y: auto; /* Permite hacer scroll solo en el contenido */

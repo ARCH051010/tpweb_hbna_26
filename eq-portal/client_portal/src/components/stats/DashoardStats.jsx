@@ -1,9 +1,17 @@
 import { useState, useEffect } from "react";
 import { obtenerEstadisticas } from "../../services/statsService";
+
 import { 
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, 
-  LineChart, Line 
-} from 'recharts';
+  faNewspaper, faCalendarAlt, faUsers, faEye 
+} from '@fortawesome/free-solid-svg-icons';
+
+// Componentes
+import KpiCard from "../cards/KpiCards";
+import AreaChartCard from "../graphic/AreaChartCard";
+import PieChartCard from "../graphic/PieChartCard";
+import UpcomingEventsCard from "../Evento/UpcomignEvents";
+
+// Estilos
 import "./dashboard-stats.css";
 
 import { useAuth } from "../../context/AuthContext";
@@ -11,6 +19,9 @@ import { useAuth } from "../../context/AuthContext";
 export default function StatsDashboard() {
   const [datos, setDatos] = useState(null);
   const [cargando, setCargando] = useState(true);
+  
+  // Colores institucionales para el gráfico de pastel
+  const COLORS = ['#0b6b4b', '#a35725ff'];
 
   const { user } = useAuth();
 
@@ -42,32 +53,63 @@ export default function StatsDashboard() {
       
       {/* TARJETAS KPI */}
       <div className="stats-kpis">
-        <div className="kpi-card">
-          <h3>Total de Noticias</h3>
-          <p className="kpi-number">{datos.kpis.total_noticias}</p>
-        </div>
-        <div className="kpi-card">
-          <h3>Total de Eventos</h3>
-          <p className="kpi-number">{datos.kpis.total_eventos}</p>
-        </div>
+        <KpiCard 
+          title="Total de noticias" 
+          value={datos.kpis.total_noticias} 
+          icon={faNewspaper} 
+          trendText="+8.3% frente al mes anterior"
+        />
+        
+        <KpiCard 
+          title="Eventos próximos" 
+          value={datos.kpis.total_eventos} 
+          icon={faCalendarAlt} 
+          trendText="2 esta semana en los próximos 30 días"
+          trendType="neutral"
+        />
+        
+        <KpiCard 
+          title="Total Usuarios" 
+          value={datos.kpis.total_usuarios} 
+          icon={faUsers} 
+          trendText="+12.6% frente a octubre"
+        />
+
+        <KpiCard 
+          title="Visitas este mes" 
+          value="6.2K" 
+          icon={faEye} 
+          trendText="+12.6% frente a octubre"
+        />
       </div>
 
-      {/* GRÁFICOS */}
-      <div className="stats-charts">
-        {/* Gráfico de Líneas: Noticias por Mes */}
-        <div className="chart-container">
-          <h3>Tendencia de Publicaciones</h3>
-          <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={datos.noticias_por_mes} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} />
-              <XAxis dataKey="mes" tick={{fontSize: 12}} />
-              <YAxis allowDecimals={false} />
-              <Tooltip />
-              <Line type="monotone" dataKey="total" stroke="var(--color-primary)" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 8 }} />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
+      {/* CONTENEDOR DE LOS GRÁFICOS */}
+      <div className="stats-graphics-container">
+        
+         <AreaChartCard 
+          title="Publicaciones mensuales"
+          subtitle="Noticias publicadas en los últimos seis meses."
+          badgeText="Jun — Nov"
+          data={datos.noticias_por_mes}
+          dataKeyX="mes"
+          dataKeyY="total"
+        />
+
+        {/* Gráfico Modular de Pastel */}
+        <PieChartCard 
+          title="Distribución de Usuarios"
+          subtitle="Roles asignados en el sistema."
+          data={datos.usuarios_pastel}
+          colors={COLORS}
+        />
+       
       </div>
+
+      {/* Próximos eventos */}
+      <div className="full-width-card">
+         <UpcomingEventsCard eventos={datos.proximos_eventos} />
+      </div>
+
     </div>
   );
 }

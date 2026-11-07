@@ -17,7 +17,7 @@ export default function BreadCrumb() {
     admins: "Administradores",
     noticias: "Noticias",
     eventos: "Eventos",
-    estadisticas: "Escritorio"
+    estadisticas: "Estadísticas"
   };
 
   return (
