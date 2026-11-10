@@ -77,3 +77,20 @@ export const actualizarConsejo = async (id, datos, imagenFile) => {
 export const eliminarConsejo = async (id) => {
   await apiClient.delete(`/institucional/consejo/${id}/`);
 };
+//  funciones para crear feu
+// Crear un nuevo miembro
+export const crearFEU = async (datos) => {
+  const respuesta = await apiClient.post('/institucional/feu/', datos);
+  return respuesta.data;
+};
+
+//  Actualizar un miembro existente
+export const actualizarFEU = async (id, datos) => {
+  const respuesta = await apiClient.put(`/institucional/feu/${id}/`, datos);
+  return respuesta.data;
+};
+
+// Eliminar un miembro
+export const eliminarFEU = async (id) => {
+  await apiClient.delete(`/institucional/feu/${id}/`);
+};

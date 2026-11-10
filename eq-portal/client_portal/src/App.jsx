@@ -16,6 +16,7 @@ import Login from "./pages/auth/Login";
 import ConsejoPage from "./pages/institucional/ConsejoPage";
 import FEUPage from "./pages/institucional/FEUPage";
 import DeptAdminPage from "./pages/institucional/DeptAdminPage"
+import FeuAdminPage from "./pages/institucional/FeuAdminPage";
 
 // Importaciones del Dashboard
 import StatsPage from "./components/stats/DashoardStats";
@@ -69,8 +70,8 @@ function AppContent() {
 
           {/* Para el PA */}
             <Route path="institucional/departamentos" element={<DeptAdminPage />} />
-
-            {/* Decomentar aquí para poder mostrar la page según corresponde NAO y ANDRIA */}
+            <Route path="institucional/feu" element={<FeuAdminPage />} />
+            {/* Decomentar aquí para poder mostrar la page según corresponde NAO y ANDRIA (soy andria y ya pusenel mio mira linia arriba)*/}
             {/* <Route path="institucional/feu" element={<ComponenteAdminPage />} /> 
             <Route path="institucional/consejo-direccion" element={<ComponenteAdminPage />} /> 
             <Route path="institucional/centro-desarrollo" element={<ComponenteAdminPage />} />  */}

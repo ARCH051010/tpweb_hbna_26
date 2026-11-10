@@ -91,6 +91,9 @@ export default function Sidebar({vistaActual, setVistaActual}) {
               Consejo de Dirección
             </NavLink>
             {/* Aquí agregarás Centros y FEU cuando las crees */}
+              <NavLink to="/dashboard/institucional/feu" className={({ isActive }) => `sidebar-sublink ${isActive ? 'activo-sub' : ''}`}>
+               Miembros FEU
+              </NavLink>
           </div>
         )}
       </div>
